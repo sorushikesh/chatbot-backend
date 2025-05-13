@@ -1,9 +1,12 @@
 import logging
+
 from pinecone import Pinecone, PodSpec
 from sentence_transformers import SentenceTransformer
+
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)
+
 
 def initialize_pinecone_index(model_name: str) -> tuple:
     collection_name = settings.PINECONE_INDEX_NAME

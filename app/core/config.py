@@ -1,7 +1,9 @@
 import os
+
 from dotenv import load_dotenv
 
 load_dotenv()
+
 
 class Settings:
     AZURE_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
@@ -16,5 +18,6 @@ class Settings:
     PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
     PINECONE_ENV = os.getenv("PINECONE_ENV")
     PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
+
 
 settings = Settings()
