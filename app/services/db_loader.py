@@ -1,11 +1,14 @@
 import logging
-from pymongo import MongoClient
+
 from langchain.schema import Document
+from pymongo import MongoClient
+
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
 from typing import List
+
 
 def convert_transaction_doc(doc: dict) -> List[Document]:
     txn_type = doc.get("transactionType", "").lower()
@@ -19,7 +22,7 @@ def convert_transaction_doc(doc: dict) -> List[Document]:
         f"Status: {doc.get('status')}",
         f"Reference Number: {doc.get('referenceNumber')}",
         f"Transaction Date: {doc.get('transactionDate')}",
-        f"Account Key: {doc.get('accountKey')}"
+        f"Account Key: {doc.get('accountKey')}",
     ]
 
     if txn_type == "credit" and "creditor" in doc:
@@ -42,10 +45,11 @@ def convert_transaction_doc(doc: dict) -> List[Document]:
         "type": txn_type,
         "status": doc.get("status"),
         "category": doc.get("category"),
-        "date": doc.get("transactionDate")
+        "date": doc.get("transactionDate"),
     }
 
     return [Document(page_content=text, metadata=metadata)]
+
 
 def load_documents() -> list[Document]:
     logger.info("Connecting to MongoDB")
